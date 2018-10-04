@@ -35,7 +35,7 @@ import BaseMatcher from './BaseMatcher';
 import Constants from '../../../streaming/constants/Constants';
 import DashConstants from '../../constants/DashConstants';
 
-const durationRegex = /^([-])?P(([\d.]*)Y)?(([\d.]*)M)?(([\d.]*)D)?T?(([\d.]*)H)?(([\d.]*)M)?(([\d.]*)S)?/;
+const durationRegex = /^(-)?P(?=.)((\d+)Y)?((\d+)M)?((\d+)D)?(T(?=.)((\d+)H)?((\d+)M)?((\d*(\.\d+)?)S)?)?/;
 
 const SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
 const SECONDS_IN_MONTH = 30 * 24 * 60 * 60;
@@ -69,9 +69,9 @@ class DurationMatcher extends BaseMatcher {
                 let result = (parseFloat(match[2] || 0) * SECONDS_IN_YEAR +
                     parseFloat(match[4] || 0) * SECONDS_IN_MONTH +
                     parseFloat(match[6] || 0) * SECONDS_IN_DAY +
-                    parseFloat(match[8] || 0) * SECONDS_IN_HOUR +
-                    parseFloat(match[10] || 0) * SECONDS_IN_MIN +
-                    parseFloat(match[12] || 0));
+                    parseFloat(match[9] || 0) * SECONDS_IN_HOUR +
+                    parseFloat(match[11] || 0) * SECONDS_IN_MIN +
+                    parseFloat(match[14] || 0));
 
                 if (match[1] !== undefined) {
                     result = -result;
